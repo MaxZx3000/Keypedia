@@ -23,3 +23,4 @@ Route::get('/home', [GeneralController::class, "get_home_page"])->name('home');
 
 Route::post('/register', [AuthController::class, "process_register"])->name('register.process');
 Route::post('/login', [AuthController::class, "process_login"])->name('login.process');
+Route::post('/logout'. [AuthController::class, "process_logout"])->name('logout');

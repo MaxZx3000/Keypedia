@@ -48,6 +48,13 @@ class AuthController extends Controller
     public function process_change_password(Request $request){
 
     }
+    public function process_logout(){
+        $message = ;
+        Auth::logout();
+        return redirect()
+                ->route('login')
+                ->with('message', array("success", ))
+    }
     public function get_login_page(){
         $message = session('message');
         return view('auth.login', compact('message'));
