@@ -15,11 +15,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $categories = [
-            ['name' => 'Sample Category 1', 'image' => 'category/Category 1'],
-            ['name' => 'Sample Category 2', 'image' => 'category/Category 2'],
-            ['name' => 'Sample Category 3', 'image' => 'category/Category 3'],
-            ['name' => 'Sample Category 4', 'image' => 'category/Category 4'],
-            ['name' => 'Sample Category 5', 'image' => 'category/Category 5']
+            ['name' => 'Sample Category 1', 'image' => 'images/category/Category 1.jpg'],
+            ['name' => 'Sample Category 2', 'image' => 'images/category/Category 2.jpg'],
+            ['name' => 'Sample Category 3', 'image' => 'images/category/Category 3.jpg'],
+            ['name' => 'Sample Category 4', 'image' => 'images/category/Category 4.jpg'],
+            ['name' => 'Sample Category 5', 'image' => 'images/category/Category 5.jpg']
         ];
 
         Category::insert($categories);

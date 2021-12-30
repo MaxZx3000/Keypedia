@@ -49,11 +49,11 @@ class AuthController extends Controller
 
     }
     public function process_logout(){
-        $message = ;
+        $message = "Logout succesfully!";
         Auth::logout();
         return redirect()
                 ->route('login')
-                ->with('message', array("success", ))
+                ->with('message', array("success", $message));
     }
     public function get_login_page(){
         $message = session('message');
