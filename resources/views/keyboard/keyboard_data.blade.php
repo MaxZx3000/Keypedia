@@ -1,12 +1,18 @@
 @extends('layout')
 @section('content')
+    <style>
+        img{
+            width: 250px;
+        }
+    </style>
     <form action="
         @if (empty($keyboard))
-            {{route('process_add_keyboard')}}
+            {{route('process_add_keyboard', ['categoryID' => $categoryID])}}
         @else
-            {{route('process_edit_keyboard')}}
+            {{route('process_edit_keyboard', ['categoryID' => $categoryID, 'keyboardID' => $keyboard->id])}}
         @endif
-    " method="post">
+    " method="post" enctype="multipart/form-data">
+        @csrf
         <div class="container">
             <div class="form-group">
                 <label for="category_id">Category</label>
@@ -40,17 +46,19 @@
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" name="price" class="form-control" id="price" value="{{old('description') ?? $keyboard["description"]}}">
+                <input type="text" name="description" class="form-control" id="description" value="{{old('description') ?? $keyboard["description"]}}">
                 @error("description")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="image">Image</label>
-                <input type="file" name="image" class="form-control" id="image" value="{{old('image') ?? $keyboard["image"]}}">
+                <input type="file" name="image" class="form-control" id="image">
                 @error("image")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
+                <p>Your previous uploaded image: </p>
+                <img src="{{old('image') ? asset(old('image')) : asset($keyboard["image"])}}">
             </div>
             <button type="submit" class="btn btn-success">Submit</button>
         </div>

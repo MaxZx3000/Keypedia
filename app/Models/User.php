@@ -26,7 +26,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-
     protected $primaryKey = "id";
     protected $table = "users";
     public $timestamps = false;

@@ -16,13 +16,14 @@
         @endphp
         <div class="alert alert-{{$errors[0][0]}}">{{$errors[1][0]}}</div>
     @endif
-    <form action="{{route('keyboard.filter')}}" action="POST">
+    <form action="{{route('keyboard.filter', ['categoryID' => $categoryID])}}" method="POST">
         @csrf
         <input type="search" name="search" id="search">
         <select name="filter" id="filter">
-
+            <option value="Name">Name</option>
+            <option value="Price">Price</option>
         </select>
-        <button>Search</button>
+        <button type="submit">Search</button>
     </form>
     <div class="container">
         <div class="row">
@@ -36,7 +37,7 @@
                     <p>{{$keyboard->price}}</p>
                     @auth
                         @if ($user["role"] == 'M')
-                            <a href="{{route('keyboard.edit', ['keyboardID' => $keyboard->id])}}" class="btn btn-success">Update Keyboard</a>
+                            <a href="{{route('keyboard.edit', ['keyboardID' => $keyboard->id, 'categoryID' => $categoryID])}}" class="btn btn-success">Update Keyboard</a>
                             <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id])}}" method="post">
                                 @method('DELETE')
                                 @csrf
