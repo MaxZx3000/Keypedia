@@ -31,21 +31,23 @@
                 @php
                     $keyboard = $keyboards[$i];
                 @endphp
-                <div class="col">
-                    <img src=" {{asset($keyboard->image)}}">
-                    <p>{{$keyboard->name}}</p>
-                    <p>{{$keyboard->price}}</p>
-                    @auth
-                        @if ($user["role"] == 'M')
-                            <a href="{{route('keyboard.edit', ['keyboardID' => $keyboard->id, 'categoryID' => $categoryID])}}" class="btn btn-success">Update Keyboard</a>
-                            <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id])}}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-success">Remove Keyboard</a>
-                            </form>
-                        @endif
-                    @endauth
-                </div>
+                <a href="{{route('detail_keyboard', ['keyboard' => $keyboard->id])}}">
+                    <div class="col">
+                        <img src="{{asset($keyboard->image)}}">
+                        <p>{{$keyboard->name}}</p>
+                        <p>{{$keyboard->price}}</p>
+                        @auth
+                            @if ($user["role"] == 'M')
+                                <a href="{{route('keyboard.edit', ['keyboardID' => $keyboard->id, 'categoryID' => $categoryID])}}" class="btn btn-success">Update Keyboard</a>
+                                <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id])}}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Remove Keyboard</a>
+                                </form>
+                            @endif
+                        @endauth
+                    </div>
+                </a>
             @endfor
         </div>
     </div>

@@ -52,9 +52,9 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#">Add Password</a></li>
-                                        <li><a class="dropdown-item" href="#">Manage Categories</a></li>
+                                        <li><a class="dropdown-item" href="{{route('category')}}">Manage Categories</a></li>
                                         <li><a class="dropdown-item" href="#">Change Password</a></li>
-                                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                                        <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
                                     </ul>
                                 </li>
                             @endif
