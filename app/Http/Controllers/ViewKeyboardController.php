@@ -12,7 +12,7 @@ class ViewKeyboardController extends Controller
         $keyboards = Keyboard::where('category_id', $categoryID)->get();
         $user = Auth::user();
         return view('keyboard.view_keyboard',
-                compact('keyboards', 'user'));
+                compact('keyboards', 'user', 'categoryID'));
     }
     public function process_filter_keyboard(Request $request){
         dd($request);

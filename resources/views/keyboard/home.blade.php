@@ -14,7 +14,7 @@
                 @php
                     $category = $categories[$i];
                 @endphp
-                <a href="{{route('view_keyboard', ['categoryID' => $category["id"]])}}">
+                <a href="{{route('keyboard', ['categoryID' => $category["id"]])}}">
                     <div class="col col-lg-4 col-md-6 col-sm-12">
                         <p>{{$category["name"]}}</p>
                         <img src = "{{asset($category["image"])}}">

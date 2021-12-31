@@ -8,6 +8,14 @@
             width: fit-content;
         }
     </style>
+    @php
+    @endphp
+    @if(Session::has('errors'))
+        @php
+            $errors = Session::get('errors')->messages();
+        @endphp
+        <div class="alert alert-{{$errors[0][0]}}">{{$errors[1][0]}}</div>
+    @endif
     <form action="{{route('keyboard.filter')}}" action="POST">
         @csrf
         <input type="search" name="search" id="search">
@@ -29,7 +37,8 @@
                     @auth
                         @if ($user["role"] == 'M')
                             <a href="{{route('keyboard.edit', ['keyboardID' => $keyboard->id])}}" class="btn btn-success">Update Keyboard</a>
-                            <form action="{{route('process_delete_keyboard')}}" method="post">
+                            <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id])}}" method="post">
+                                @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-success">Remove Keyboard</a>
                             </form>
