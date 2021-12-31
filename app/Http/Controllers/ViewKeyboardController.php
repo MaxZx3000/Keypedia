@@ -29,7 +29,6 @@ class ViewKeyboardController extends Controller
         }
 
         $user = Auth::user();
-
         return view('keyboard.view_keyboard', compact('keyboards', 'user', 'categoryID'));
     }
 }

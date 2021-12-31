@@ -12,7 +12,7 @@ class CreateKeyboardTable extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id')->autoIncrement(false);
             $table->char('name', 60);
-            $table->bigInteger('price')->autoIncrement(false);
+            $table->unsignedBigInteger('price')->autoIncrement(false);
             $table->text('description');
             $table->char('image', 100);
             $table->foreign('category_id')
