@@ -6,10 +6,9 @@ use App\Http\Controllers\DataKeyboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ViewKeyboardController;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AuthController::class, "get_login_page"]);
+Route::get('/', [AuthController::class, "get_home_page"]);
 
 Route::get('/login', [AuthController::class, "get_login_page"])->name('login');
 Route::get('/register', [AuthController::class, "get_register_page"])->name('register');
@@ -20,7 +19,7 @@ Route::get('/add_keyboard', [DataKeyboardController::class, "get_add_keyboard_pa
 Route::get('/detail_keyboard/{keyboard}', [TransactionController::class, "get_detail_keyboard_page"])->name('detail_keyboard');
 Route::get('/manage_categories', [CategoryController::class, "get_manage_categories_page"])->name('category');
 Route::get('/edit_category/{category}', [CategoryController::class, "get_edit_category_page"])->name('category.update');
-
+Route::get('/change_password', [AuthController::class, "get_change_password_page"])->name('change_password');
 
 Route::post('/register', [AuthController::class, "process_register"])->name('register.process');
 Route::post('/login', [AuthController::class, "process_login"])->name('login.process');
@@ -30,6 +29,7 @@ Route::post('/add_keyboard', [DataKeyboardController::class, "process_add_keyboa
 Route::post('/edit_keyboard/{categoryID}/{keyboardID}', [DataKeyboardController::class, "process_edit_keyboard"])->name('process_edit_keyboard');
 Route::post('/detail_keyboard/{keyboard}', [TransactionController::class, "process_detail_keyboard"])->name('process_detail_keyboard');
 Route::post('/edit_category/{category}', [CategoryController::class, "process_edit_category"])->name('process_edit_category');
+Route::post('/change_password', [AuthController::class, "process_change_password"])->name('process_change_password');
 
 Route::delete('/delete_keyboard/{keyboard}', [DataKeyboardController::class, "process_delete_keyboard"])->name('process_delete_keyboard');
 Route::delete('/delete_category/{category}', [CategoryController::class, "process_delete_category"])->name('process_delete_category');

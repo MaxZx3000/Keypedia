@@ -15,7 +15,7 @@ class DataKeyboardController extends FileController
             'name' => "required|min:5",
             'price' => "required|gt:0|integer",
             'description' => "required|min:20",
-            'image' => 'nullable|mime:jpeg,bmp,png,jpg'
+            'image' => 'nullable|image'
         ]);
     }
 

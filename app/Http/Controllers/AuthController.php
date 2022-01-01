@@ -46,6 +46,7 @@ class AuthController extends Controller
             ->with('message', array("success", $message));
     }
     public function process_change_password(Request $request){
+        $validatedData = $this->validate_change_password($request);
 
     }
     public function process_logout(){
@@ -63,7 +64,8 @@ class AuthController extends Controller
         return view('auth.register');
     }
     public function get_change_password_page(){
-        return view('register');
+        $user = Auth::user();
+        return view('register', compact("user"));
     }
     private function validate_user(Request $request, $userId = -1){
         return $request->validate([
@@ -80,6 +82,14 @@ class AuthController extends Controller
         return $request->validate([
             "email_address" => "required|email",
             "password" => "required"
+        ]);
+    }
+    private function validate_change_password(Request $request){
+        $user = Auth::user();
+        return $request->validate([
+            "confirm_password" => "required|in:$user->password",
+            'new_password' => 'required',
+            'new_confirm_password' => 'required|same:new_password',
         ]);
     }
 }

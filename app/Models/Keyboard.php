@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Keyboard extends Model
 {
     protected $fillable = [
-        'category',
+        'category_id',
         'name',
         'price',
         'description',

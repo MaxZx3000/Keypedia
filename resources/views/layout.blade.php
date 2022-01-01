@@ -18,7 +18,7 @@
     </style>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="{{route('home')}}">Keypedia</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,25 +36,31 @@
                             @if ($user->role == 'C')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
+                                        {{$user["name"]}}
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#">My Cart</a></li>
                                         <li><a class="dropdown-item" href="#">Transaction History</a></li>
-                                        <li><a class="dropdown-item" href="#">Change Password</a></li>
-                                        <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+                                        <li><a class="dropdown-item" href="{{route('change_password')}}">Change Password</a></li>
+                                        <form action="{{route('logout')}}" method="POST">
+                                            @csrf
+                                            <li><button type="submit" class="dropdown-item">Logout</button></li>
+                                        </form>
                                     </ul>
                                 </li>
                             @elseif ($user->role == 'M')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
+                                        {{$user["name"]}}
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="{{route('')}}">Add Password</a></li>
+                                        <li><a class="dropdown-item" href="{{route('keyboard.add')}}">Add Keyboard</a></li>
                                         <li><a class="dropdown-item" href="{{route('category')}}">Manage Categories</a></li>
-                                        <li><a class="dropdown-item" href="#">Change Password</a></li>
-                                        <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+                                        <li><a class="dropdown-item" href="{{route('change_password')}}">Change Password</a></li>
+                                        <form action="{{route('logout')}}" method="POST">
+                                            @csrf
+                                            <li><button type="submit">Logout</button></li>
+                                        </form>
                                     </ul>
                                 </li>
                             @endif
