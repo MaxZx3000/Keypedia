@@ -12,7 +12,7 @@ class CreateCategoryTable extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->char('name', 60);
-            $table->char('image', 40);
+            $table->char('image', 40)->nullable();
         });
     }
 

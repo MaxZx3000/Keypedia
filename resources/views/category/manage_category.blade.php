@@ -15,7 +15,7 @@
                 <div class="col">
                     <img src="{{asset($category['image'])}}">
                     <p>{{$category["name"]}}</p>
-                    <form action="{{route('process_delete_category', ['category' => $category->id])}}" method="POST">
+                    <form action="{{route('process_delete_category', ['category' => $category->id])}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method("DELETE")
                         <button type="submit" class="btn btn-success">Delete Categories</button>

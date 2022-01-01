@@ -16,6 +16,7 @@ Route::get('/register', [AuthController::class, "get_register_page"])->name('reg
 Route::get('/home', [HomeController::class, "get_home_page"])->name('home');
 Route::get('/view_keyboard/{categoryID}', [ViewKeyboardController::class, "get_view_keyboard_page"])->name('keyboard');
 Route::get('/edit_keyboard/{categoryID}/{keyboardID}', [DataKeyboardController::class, "get_edit_keyboard_page"])->name('keyboard.edit');
+Route::get('/add_keyboard', [DataKeyboardController::class, "get_add_keyboard_page"])->name('keyboard.add');
 Route::get('/detail_keyboard/{keyboard}', [TransactionController::class, "get_detail_keyboard_page"])->name('detail_keyboard');
 Route::get('/manage_categories', [CategoryController::class, "get_manage_categories_page"])->name('category');
 Route::get('/edit_category/{category}', [CategoryController::class, "get_edit_category_page"])->name('category.update');

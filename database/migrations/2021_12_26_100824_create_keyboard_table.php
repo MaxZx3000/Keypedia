@@ -14,7 +14,7 @@ class CreateKeyboardTable extends Migration
             $table->char('name', 60);
             $table->unsignedBigInteger('price')->autoIncrement(false);
             $table->text('description');
-            $table->char('image', 100);
+            $table->char('image', 100)->nullable();
             $table->foreign('category_id')
                   ->references('id')
                   ->on('category')
