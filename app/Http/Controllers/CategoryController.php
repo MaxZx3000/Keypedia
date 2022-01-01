@@ -20,7 +20,7 @@ class CategoryController extends Controller
         $user = Auth::user();
         return view('category.category_data', compact('user', 'category'));
     }
-    public function process_edit_category(Request $request)
+    public function process_edit_category(Request $request, Category $category)
     {
 
     }

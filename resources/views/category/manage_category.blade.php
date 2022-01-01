@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-success">Delete Categories</button>
                     </form>
 
-                    <a href="{{route('category.update')}}" class="btn btn-success">Update Categories</a>
+                    <a href="{{route('category.update', ['category' => $category->id])}}" class="btn btn-success">Update Categories</a>
                 </div>
             @endforeach
         </div>

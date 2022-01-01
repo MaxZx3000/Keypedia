@@ -18,7 +18,7 @@ Route::get('/view_keyboard/{categoryID}', [ViewKeyboardController::class, "get_v
 Route::get('/edit_keyboard/{categoryID}/{keyboardID}', [DataKeyboardController::class, "get_edit_keyboard_page"])->name('keyboard.edit');
 Route::get('/detail_keyboard/{keyboard}', [TransactionController::class, "get_detail_keyboard_page"])->name('detail_keyboard');
 Route::get('/manage_categories', [CategoryController::class, "get_manage_categories_page"])->name('category');
-Route::get('/edit_category', [CategoryController::class, "get_edit_category_page"])->name('category.update');
+Route::get('/edit_category/{category}', [CategoryController::class, "get_edit_category_page"])->name('category.update');
 
 
 Route::post('/register', [AuthController::class, "process_register"])->name('register.process');
@@ -28,7 +28,7 @@ Route::post('/view_keyboard/{categoryID}', [ViewKeyboardController::class, "proc
 Route::post('/add_keyboard', [DataKeyboardController::class, "process_add_keyboard"])->name('process_add_keyboard');
 Route::post('/edit_keyboard/{categoryID}/{keyboardID}', [DataKeyboardController::class, "process_edit_keyboard"])->name('process_edit_keyboard');
 Route::post('/detail_keyboard/{keyboard}', [TransactionController::class, "process_detail_keyboard"])->name('process_detail_keyboard');
-Route::post('/edit_category/{category}', [CategoryController::class, "process_edit_category"])->name('process-edit_category');
+Route::post('/edit_category/{category}', [CategoryController::class, "process_edit_category"])->name('process_edit_category');
 
 Route::delete('/delete_keyboard/{keyboard}', [DataKeyboardController::class, "process_delete_keyboard"])->name('process_delete_keyboard');
 Route::delete('/delete_category/{category}', [CategoryController::class, "process_delete_category"])->name('process_delete_category');

@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    <form action="{{route('process_edit_category')}}" method="POST">
+    <form action="{{route('process_edit_category', ["category" => $category->id])}}" method="POST">
         <div class="form-group">
             <label for="name">Category Name</label>
             <input type="text" name="name" id="name">
