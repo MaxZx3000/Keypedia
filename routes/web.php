@@ -31,6 +31,7 @@ Route::post('/edit_keyboard/{categoryID}/{keyboardID}', [DataKeyboardController:
 Route::post('/detail_keyboard/{keyboard}', [TransactionController::class, "process_detail_keyboard"])->name('process_detail_keyboard');
 Route::post('/edit_category/{category}', [CategoryController::class, "process_edit_category"])->name('process_edit_category');
 Route::post('/change_password/{user}', [AuthController::class, "process_change_password"])->name('process_change_password');
+Route::post('/my_cart/{keyboard}/{user}', [TransactionController::class, :]);
 
 Route::delete('/delete_keyboard/{category}/{keyboard}', [DataKeyboardController::class, "process_delete_keyboard"])->name('process_delete_keyboard');
 Route::delete('/delete_category/{category}', [CategoryController::class, "process_delete_category"])->name('process_delete_category');

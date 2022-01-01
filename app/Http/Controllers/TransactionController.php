@@ -11,33 +11,38 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-
-    public function get_transaction_history_page()
+    public function process_add_to_cart(Request $request, Keyboard $keyboard, User $user)
     {
-
-    }
-    public function process_add_to_cart()
-    {
-
-    }
-    public function process_detail_keyboard(Request $request, Keyboard $keyboard)
-    {
-        $validatedData = $this->validate_quantity_keyboard($request);
-        $user = Auth::user();
-
+        $validatedData = $this->validate_quantity_keyboard($request, -1);
         $shoppingCart = new ShoppingCart([
             "user_id" => $user->id,
             "keyboard_id" => $keyboard->id,
             "quantity" => $validatedData["quantity"],
         ]);
-        // try{
+        if ($validatedData["quantity"] == 0){
+            $shoppingCart->update();
+        }
+        else{
+            $shoppingCart->delete();
+        }
+    }
+    public function process_detail_keyboard(Request $request, Keyboard $keyboard)
+    {
+        $validatedData = $this->validate_quantity_keyboard($request, 0);
+        $user = Auth::user();
+        $shoppingCart = new ShoppingCart([
+            "user_id" => $user->id,
+            "keyboard_id" => $keyboard->id,
+            "quantity" => $validatedData["quantity"],
+        ]);
+        try{
             $shoppingCart->save();
-        // }
-        // catch(Exception $e){
-            // $shoppingCart->where('user_id', $user->id)
-            //             ->where('keyboard_id', $keyboard->id)
-            //             ->update(["quantity" => $validatedData["quantity"]]);
-        // }
+        }
+        catch(Exception $e){
+            $shoppingCart->where('user_id', $user->id)
+                        ->where('keyboard_id', $keyboard->id)
+                        ->update(["quantity" => $validatedData["quantity"]]);
+        }
 
         return redirect()
                 ->route('my_cart', ['user' => $user->id]);
@@ -53,12 +58,6 @@ class TransactionController extends Controller
         $keyboards = $this->get_keyboards_data($shoppingCarts);
         return view('transaction.shopping_cart', compact('shoppingCarts', 'keyboards', 'user'));
     }
-    private function validate_quantity_keyboard(Request $request)
-    {
-        return $request->validate([
-            "quantity" => 'required|min:0'
-        ]);
-    }
     private function get_keyboards_data($shoppingCarts){
         $keyboards = [];
         foreach ($shoppingCarts as $shoppingCart) {
@@ -68,4 +67,15 @@ class TransactionController extends Controller
         }
         return $keyboards;
     }
+    public function get_transaction_history_page()
+    {
+
+    }
+    private function validate_quantity_keyboard(Request $request, int $gtValue)
+    {
+        return $request->validate([
+            "quantity" => "required|gt:$gtValue"
+        ]);
+    }
+
 }
