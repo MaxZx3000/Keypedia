@@ -13,6 +13,7 @@
                     @csrf
                     @auth
                         <div class="form-group">
+                            <label for="quantity">Quantity</label>
                             <input type="number" name="quantity" id="quantity">
                             @error("quantity")
                                 <div class="text-danger">{{$message}}</div>

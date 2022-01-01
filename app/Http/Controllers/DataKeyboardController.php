@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Keyboard;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,6 +42,7 @@ class DataKeyboardController extends FileController
                 ->route('keyboard', ['categoryID' => $categoryID])
                 ->withErrors(array('success', $message));
     }
+
     public function get_edit_keyboard_page($keyboardID, $categoryID){
         $keyboard = Keyboard::where('id', $keyboardID)
                     ->first();
@@ -56,10 +58,7 @@ class DataKeyboardController extends FileController
 
         return view('keyboard.keyboard_data', compact('keyboard', 'categories', 'user', 'categoryID'));
     }
-    public function get_add_to_cart_page(Request $request){
 
-        return view('keyb');
-    }
     private function validate_keyboard_data(Request $request){
         return $request->validate([
             'category_id' => 'required',
@@ -68,10 +67,5 @@ class DataKeyboardController extends FileController
             'description' => "required|min:20",
             'image' => 'nullable|image'
         ]);
-    }
-    private function validate_quantity(Request $request)
-    {
-        
-        return view();
     }
 }

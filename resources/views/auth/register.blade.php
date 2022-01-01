@@ -1,18 +1,18 @@
 @extends("layout")
 @section("content")
     <div class="container">
-        <form action = "{{route('register.process')}}" method="POST">
+        <form action = "{{route('register.process')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" class="form-control" id="username">
+                <input type="text" name="username" class="form-control" id="username" value="{{old('username')}}">
                 @error("username")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="email_address">E-Mail Address</label>
-                <input type="text" name="email_address" class="form-control" id="email_address">
+                <input type="text" name="email_address" class="form-control" id="email_address" value="{{old('email_address')}}">
                 @error("email_address")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <textarea name="address" id="address" cols="30" class="form-control" rows="10"></textarea>
+                <textarea name="address" id="address" cols="30" class="form-control" rows="10">{{old('address')}}</textarea>
                 @error("address")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
@@ -41,12 +41,18 @@
             <div class="form-group">
                 <label>Gender</label>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="Male" value="Male">
+                    <input class="form-check-input" type="radio" name="gender" id="Male" value="Male"
+                        @if (old('gender') == 'Male')
+                            checked
+                        @endif>
                     <label class="form-check-label" for="Male">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="Female" value="Female">
-                    <label class="form-check-label" for="Female">Female</label>
+                    <input class="form-check-input" type="radio" name="gender" id="Female" value="Female"
+                    @if (old('gender') == 'Female')
+                        checked
+                    @endif>
+                    <label class="form-check-label" for="Female" >Female</label>
                 </div>
                 @error("gender")
                     <div class="text-danger">{{$message}}</div>
@@ -54,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label for="date_of_birth">Date of Birth</label>
-                <input type="date" name="date_of_birth" id="date_of_birth">
+                <input type="date" name="date_of_birth" id="date_of_birth" value="{{old('date_of_birth')}}">
                 @error("date_of_birth")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
