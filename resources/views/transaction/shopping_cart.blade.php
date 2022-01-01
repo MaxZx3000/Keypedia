@@ -20,8 +20,9 @@
                 </div>
                 <div class="col-9">
                     <p>Subtotal: {{$shoppingCart["quantity"] * $keyboard["price"]}}</p>
-                    <input type="number" name="quantity" id="quantity" value="{{$shoppingCart->quantity}}">
-                    <form action="{{route('process', ["keyboard" => $keyboard, "user" => $user])}}" method="post">
+                    <form action="{{route('process_my_cart', ["keyboard" => $keyboard, "user" => $user])}}" method="post">
+                        @csrf
+                        <input type="number" name="quantity" id="quantity" value="{{$shoppingCart->quantity}}">
                         <button type="submit">Update</button>
                     </form>
                 </div>

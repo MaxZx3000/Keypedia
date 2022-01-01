@@ -11,20 +11,24 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    public function process_add_to_cart(Request $request, Keyboard $keyboard, User $user)
+    public function process_my_cart(Request $request, Keyboard $keyboard, User $user)
     {
         $validatedData = $this->validate_quantity_keyboard($request, -1);
-        $shoppingCart = new ShoppingCart([
-            "user_id" => $user->id,
-            "keyboard_id" => $keyboard->id,
-            "quantity" => $validatedData["quantity"],
-        ]);
+        $shoppingCart = ShoppingCart::where('user_id', $user->id)
+                        ->where('keyboard_id', $keyboard->id);
+
         if ($validatedData["quantity"] == 0){
-            $shoppingCart->update();
-        }
-        else{
             $shoppingCart->delete();
         }
+        else{
+            $shoppingCart->update([
+                "quantity" => $validatedData["quantity"]
+            ]);
+        }
+
+        return redirect()
+                ->route('my_cart', ["user" => $user->id])
+                ->with('message', "");
     }
     public function process_detail_keyboard(Request $request, Keyboard $keyboard)
     {
