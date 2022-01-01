@@ -9,16 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DataKeyboardController extends FileController
 {
-    private function validate_keyboard_data(Request $request){
-        return $request->validate([
-            'category_id' => 'required',
-            'name' => "required|min:5",
-            'price' => "required|gt:0|integer",
-            'description' => "required|min:20",
-            'image' => 'nullable|image'
-        ]);
-    }
-
     public function process_add_keyboard(Request $request)
     {
         dd('Add Keyboard');
@@ -65,5 +55,23 @@ class DataKeyboardController extends FileController
         $keyboard = new Keyboard();
 
         return view('keyboard.keyboard_data', compact('keyboard', 'categories', 'user', 'categoryID'));
+    }
+    public function get_add_to_cart_page(Request $request){
+
+        return view('keyb');
+    }
+    private function validate_keyboard_data(Request $request){
+        return $request->validate([
+            'category_id' => 'required',
+            'name' => "required|min:5",
+            'price' => "required|gt:0|integer",
+            'description' => "required|min:20",
+            'image' => 'nullable|image'
+        ]);
+    }
+    private function validate_quantity(Request $request)
+    {
+        
+        return view();
     }
 }

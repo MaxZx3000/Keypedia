@@ -36,12 +36,12 @@
                             @if ($user->role == 'C')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{$user["name"]}}
+                                        {{$user["username"]}}
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#">My Cart</a></li>
                                         <li><a class="dropdown-item" href="#">Transaction History</a></li>
-                                        <li><a class="dropdown-item" href="{{route('change_password')}}">Change Password</a></li>
+                                        <li><a class="dropdown-item" href="{{route('change_password', ['user' => $user->id])}}">Change Password</a></li>
                                         <form action="{{route('logout')}}" method="POST">
                                             @csrf
                                             <li><button type="submit" class="dropdown-item">Logout</button></li>
@@ -51,12 +51,12 @@
                             @elseif ($user->role == 'M')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{$user["name"]}}
+                                        {{$user["username"]}}
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="{{route('keyboard.add')}}">Add Keyboard</a></li>
                                         <li><a class="dropdown-item" href="{{route('category')}}">Manage Categories</a></li>
-                                        <li><a class="dropdown-item" href="{{route('change_password')}}">Change Password</a></li>
+                                        <li><a class="dropdown-item" href="{{route('change_password', ['user' => $user->id])}}">Change Password</a></li>
                                         <form action="{{route('logout')}}" method="POST">
                                             @csrf
                                             <li><button type="submit">Logout</button></li>

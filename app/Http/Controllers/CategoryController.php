@@ -22,14 +22,12 @@ class CategoryController extends FileController
     }
     public function process_edit_category(Request $request, Category $category)
     {
-        $validatedData = $this->validate_category_data($request);
+        $validatedData = $this->validate_category_data($request, $category);
 
         $validatedData["image"] = $this->replace_file_data($request, $request->image, $category["image"]);
 
         $category->where('id', $category->id)
                  ->update($validatedData);
-
-
 
         $message = "$category->name has been successfully updated!";
         return redirect()
@@ -42,14 +40,13 @@ class CategoryController extends FileController
 
         $message = "$categoryName has been successfully deleted!";
 
-
         return redirect()
                 ->route('category')
                 ->with('message', array('success', $message));
     }
-    private function validate_category_data(Request $request){
+    private function validate_category_data(Request $request, Category $category){
         return $request->validate([
-            'name' => 'required|unique:category,name,except,id|min:5',
+            'name' => "required|unique:category,name,$category->name|min:5",
             'image' => 'nullable|image'
         ]);
     }

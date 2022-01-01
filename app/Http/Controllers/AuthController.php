@@ -45,9 +45,17 @@ class AuthController extends Controller
             ->route('login')
             ->with('message', array("success", $message));
     }
-    public function process_change_password(Request $request){
-        $validatedData = $this->validate_change_password($request);
+    public function process_change_password(Request $request, User $user){
+        $validatedData = $this->validate_change_password($request, $user);
 
+        $user = $user->update([
+            "password" => $validatedData['new_password']
+        ]);
+
+        $message = "Password has been updated!";
+        return redirect()
+                ->route('home')
+                ->with('message', array('success', $message));
     }
     public function process_logout(){
         $message = "Logout succesfully!";
@@ -63,9 +71,8 @@ class AuthController extends Controller
     public function get_register_page(){
         return view('auth.register');
     }
-    public function get_change_password_page(){
-        $user = Auth::user();
-        return view('register', compact("user"));
+    public function get_change_password_page(User $user){
+        return view('auth.change_password', compact("user"));
     }
     private function validate_user(Request $request, $userId = -1){
         return $request->validate([
@@ -84,12 +91,11 @@ class AuthController extends Controller
             "password" => "required"
         ]);
     }
-    private function validate_change_password(Request $request){
-        $user = Auth::user();
+    private function validate_change_password(Request $request, User $user){
         return $request->validate([
-            "confirm_password" => "required|in:$user->password",
-            'new_password' => 'required',
-            'new_confirm_password' => 'required|same:new_password',
+            "current_password" => "required|in:$user->password",
+            'new_password' => 'required|min:8',
+            'confirm_new_password' => 'required|same:new_password',
         ]);
     }
 }

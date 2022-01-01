@@ -10,8 +10,10 @@ class CreateTransactionTable extends Migration
     {
         Schema::create('transaction', function (Blueprint $table) {
             $table->id();
+            $table->image('keyboard_image');
+            $table->unsignedBigInteger('user_id', false);
             $table->char('keyboard_name', 60);
-            $table->unsignedBigInteger('sub_price', false);
+            $table->unsignedBigInteger('price_per_keyboard', false);
             $table->integer('quantity');
             $table->timestamp('date');
         });
