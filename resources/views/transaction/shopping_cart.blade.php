@@ -1,5 +1,10 @@
 @extends('layout')
 @section('content')
+    <style>
+        img{
+            width: 100%;
+        }
+    </style>
     <h2>My Cart</h2>
     <div class="container">
         <div class="row">

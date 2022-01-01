@@ -38,8 +38,8 @@
                         <p>{{$keyboard->price}}</p>
                         @auth
                             @if ($user["role"] == 'M')
-                                <a href="{{route('keyboard.edit', ['keyboardID' => $keyboard->id, 'categoryID' => $categoryID])}}" class="btn btn-success">Update Keyboard</a>
-                                <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id])}}" method="post">
+                                <a href="{{route('keyboard.edit', ['keyboard' => $keyboard->id, 'categoryID' => $categoryID])}}" class="btn btn-success">Update Keyboard</a>
+                                <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id, 'category' => $categoryID])}}" method="post">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-success">Remove Keyboard</a>

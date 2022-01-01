@@ -12,8 +12,8 @@ class ShoppingCart extends Model
         "keyboard_id",
         "quantity"
     ];
-    
-    protected $primaryKey = "id";
+
     public $timestamps = false;
+    protected $primaryKey = ["user_id", "keyboard_id"];
     protected $table = "shopping_cart";
 }

@@ -6,8 +6,8 @@
         }
     </style>
     <form action="
-        @if (empty($keyboard))
-            {{route('process_add_keyboard', ['categoryID' => $categoryID])}}
+        @if (empty($keyboard->name))
+            {{route('process_add_keyboard')}}
         @else
             {{route('process_edit_keyboard', ['categoryID' => $categoryID, 'keyboardID' => $keyboard->id])}}
         @endif
@@ -21,7 +21,7 @@
                         @php
                             $category = $categories[$i];
                         @endphp
-                        <option value = "{{$i}}" @if ($category->id == $keyboard->category_id)
+                        <option value = "{{$category->id}}" @if ($category->id == $keyboard->category_id)
                                 selected = "selected"
                             @endif>{{$category->name}}</option>
                     @endfor

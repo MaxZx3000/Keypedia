@@ -12,19 +12,25 @@ class DataKeyboardController extends FileController
 {
     public function process_add_keyboard(Request $request)
     {
-        dd('Add Keyboard');
         $validatedData = $this->validate_keyboard_data($request);
 
         $keyboard = new Keyboard($validatedData);
+        $keyboard["image"] = $this->save_file_data($request, $request->image);
         $keyboard->save();
+
+        $message = "$keyboard->name has been successfully added!";
+
+        return redirect()
+                ->route('home')
+                ->with('message', $message);
     }
-    public function process_delete_keyboard(Keyboard $keyboard)
+    public function process_delete_keyboard(Category $category, Keyboard $keyboard)
     {
         $keyboardName = $keyboard->name;
         $keyboard->first()->delete();
 
         return redirect()
-                ->back()
+                ->route('keyboard', $category->id)
                 ->withErrors(array("success", "$keyboardName has been deleted successfully!"));
     }
     public function process_edit_keyboard(Request $request, $keyboardID, $categoryID)
@@ -43,9 +49,7 @@ class DataKeyboardController extends FileController
                 ->withErrors(array('success', $message));
     }
 
-    public function get_edit_keyboard_page($keyboardID, $categoryID){
-        $keyboard = Keyboard::where('id', $keyboardID)
-                    ->first();
+    public function get_edit_keyboard_page($categoryID, Keyboard $keyboard){
         $categories = Category::all();
         $user = Auth::user();
 
@@ -56,7 +60,7 @@ class DataKeyboardController extends FileController
         $categories = Category::all();
         $keyboard = new Keyboard();
 
-        return view('keyboard.keyboard_data', compact('keyboard', 'categories', 'user', 'categoryID'));
+        return view('keyboard.keyboard_data', compact('keyboard', 'categories', 'user'));
     }
 
     private function validate_keyboard_data(Request $request){

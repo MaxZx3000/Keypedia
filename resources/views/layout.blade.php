@@ -39,7 +39,7 @@
                                         {{$user["username"]}}
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#">My Cart</a></li>
+                                        <li><a class="dropdown-item" href="{{route('my_cart', ["user" => $user->id])}}">My Cart</a></li>
                                         <li><a class="dropdown-item" href="#">Transaction History</a></li>
                                         <li><a class="dropdown-item" href="{{route('change_password', ['user' => $user->id])}}">Change Password</a></li>
                                         <form action="{{route('logout')}}" method="POST">
