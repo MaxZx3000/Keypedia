@@ -13,6 +13,7 @@ class Transaction extends Model
         "keyboard_image",
         "price_per_keyboard",
         "quantity",
+        "date"
     ];
 
     protected $primaryKey = "id";

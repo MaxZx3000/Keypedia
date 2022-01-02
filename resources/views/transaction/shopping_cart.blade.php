@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-9">
                     <p>Subtotal: {{$shoppingCart["quantity"] * $keyboard["price"]}}</p>
-                    <form action="{{route('process_my_cart', ["keyboard" => $keyboard, "user" => $user])}}" method="post">
+                    <form action="{{route('process_my_cart_update_quantity', ["keyboard" => $keyboard, "user" => $user])}}" method="post">
                         @csrf
                         <input type="number" name="quantity" id="quantity" value="{{$shoppingCart->quantity}}">
                         <button type="submit">Update</button>
@@ -32,4 +32,8 @@
             @endforeach
         </div>
     </div>
+    <form action="{{route('process_my_cart_checkout', ["user" => $user])}}" method="POST">
+        @csrf
+        <button type="submit">Checkout</button>
+    </form>
 @endsection

@@ -4,14 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Keyboard;
 use App\Models\ShoppingCart;
+use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TransactionController extends Controller
+class TransactionController extends FileController
 {
-    public function process_my_cart(Request $request, Keyboard $keyboard, User $user)
+    public function process_my_cart_checkout(User $user)
+    {
+        $checkoutShoppingCarts = ShoppingCart::where('user_id', $user->id)->get();
+        $message = "Your shopping cart data have been saved!";
+        foreach ($checkoutShoppingCarts as $checkoutShoppingCart) {
+            $keyboard = Keyboard::where('id', $checkoutShoppingCart->keyboard_id)
+                                ->first();
+            $transactionHistory = new Transaction([
+                "user_id" => $user->id,
+                "keyboard_name" => $keyboard["name"],
+                "keyboard_image" => $keyboard["image"],
+                "price_per_keyboard" => $keyboard["price"],
+                "quantity" => $checkoutShoppingCart["quantity"],
+                "date" => Carbon::now()->format('Y-m-d h:m:s')
+            ]);
+            $transactionHistory->save();
+        }
+
+        return redirect()
+                ->route('history_transaction', ["user" => $user])
+                ->with("message", array('success', $message));
+    }
+    public function process_my_cart_update_quantity(Request $request, Keyboard $keyboard, User $user)
     {
         $validatedData = $this->validate_quantity_keyboard($request, -1);
         $shoppingCart = ShoppingCart::where('user_id', $user->id)
@@ -27,8 +51,7 @@ class TransactionController extends Controller
         }
 
         return redirect()
-                ->route('my_cart', ["user" => $user->id])
-                ->with('message', "");
+                ->route('my_cart', ["user" => $user->id]);
     }
     public function process_detail_keyboard(Request $request, Keyboard $keyboard)
     {
@@ -71,9 +94,10 @@ class TransactionController extends Controller
         }
         return $keyboards;
     }
-    public function get_transaction_history_page()
+    public function get_transaction_history_page(User $user)
     {
-
+        $transactions = Transaction::where('user_id', $user);
+        return view("transaction.history_transactions", compact("transactions"));
     }
     private function validate_quantity_keyboard(Request $request, int $gtValue)
     {

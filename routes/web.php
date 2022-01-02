@@ -21,6 +21,7 @@ Route::get('/manage_categories', [CategoryController::class, "get_manage_categor
 Route::get('/edit_category/{category}', [CategoryController::class, "get_edit_category_page"])->name('category.update');
 Route::get('/change_password/{user}', [AuthController::class, "get_change_password_page"])->name('change_password');
 Route::get('/my_cart/{user}', [TransactionController::class, "get_my_cart_page"])->name('my_cart');
+Route::get('/history_transaction/{user}', [TransactionController::class, "get_transaction_history_page"])->name('history_transaction');
 
 Route::post('/register', [AuthController::class, "process_register"])->name('register.process');
 Route::post('/login', [AuthController::class, "process_login"])->name('login.process');
@@ -31,8 +32,8 @@ Route::post('/edit_keyboard/{categoryID}/{keyboardID}', [DataKeyboardController:
 Route::post('/detail_keyboard/{keyboard}', [TransactionController::class, "process_detail_keyboard"])->name('process_detail_keyboard');
 Route::post('/edit_category/{category}', [CategoryController::class, "process_edit_category"])->name('process_edit_category');
 Route::post('/change_password/{user}', [AuthController::class, "process_change_password"])->name('process_change_password');
-Route::post('/my_cart/{keyboard}/{user}', [TransactionController::class, "process_my_cart"])->name('process_my_cart');
+Route::post('/my_cart/{user}/{keyboard}', [TransactionController::class, "process_my_cart_update_quantity"])->name('process_my_cart_update_quantity');
+Route::post('/checkout/{user}', [TransactionController::class, "process_my_cart_checkout"])->name('process_my_cart_checkout');
 
 Route::delete('/delete_keyboard/{category}/{keyboard}', [DataKeyboardController::class, "process_delete_keyboard"])->name('process_delete_keyboard');
 Route::delete('/delete_category/{category}', [CategoryController::class, "process_delete_category"])->name('process_delete_category');
-
