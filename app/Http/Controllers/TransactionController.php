@@ -30,7 +30,7 @@ class TransactionController extends FileController
             ]);
             $transactionHistory->save();
         }
-
+        Transaction::truncate();
         return redirect()
                 ->route('history_transaction', ["user" => $user])
                 ->with("message", array('success', $message));
@@ -96,8 +96,17 @@ class TransactionController extends FileController
     }
     public function get_transaction_history_page(User $user)
     {
-        $transactions = Transaction::where('user_id', $user);
-        return view("transaction.history_transactions", compact("transactions"));
+        $transactions = Transaction::where('user_id', $user->id)
+                                    ->distinct()
+                                    ->get(['date']);
+        return view("transaction.history_transactions", compact(["user", "transactions"]));
+    }
+    public function get_transaction_detail_page(User $user, $transactionDate)
+    {
+        $transactions = Transaction::where('user_id', $user->id)
+                                    ->where('date', $transactionDate)
+                                    ->get();
+        return view('transaction.detail_transaction', compact(['user', 'transactions']));
     }
     private function validate_quantity_keyboard(Request $request, int $gtValue)
     {

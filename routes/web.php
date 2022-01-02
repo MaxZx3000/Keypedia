@@ -22,6 +22,7 @@ Route::get('/edit_category/{category}', [CategoryController::class, "get_edit_ca
 Route::get('/change_password/{user}', [AuthController::class, "get_change_password_page"])->name('change_password');
 Route::get('/my_cart/{user}', [TransactionController::class, "get_my_cart_page"])->name('my_cart');
 Route::get('/history_transaction/{user}', [TransactionController::class, "get_transaction_history_page"])->name('history_transaction');
+Route::get('/detail_transaction/{user}/{transactionID}', [TransactionController::class, "get_transaction_detail_page"])->name('detail_transaction');
 
 Route::post('/register', [AuthController::class, "process_register"])->name('register.process');
 Route::post('/login', [AuthController::class, "process_login"])->name('login.process');

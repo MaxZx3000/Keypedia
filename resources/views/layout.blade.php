@@ -15,6 +15,13 @@
         h2{
             font-size: 25px;
         }
+        .keyboard-image{
+            width: 250px;
+            height: 200px;
+        }
+        a{
+            text-decoration: none;
+        }
     </style>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -40,7 +47,7 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="{{route('my_cart', ["user" => $user->id])}}">My Cart</a></li>
-                                        <li><a class="dropdown-item" href="#">Transaction History</a></li>
+                                        <li><a class="dropdown-item" href="{{route('history_transaction', ['user' => $user->id])}}">Transaction History</a></li>
                                         <li><a class="dropdown-item" href="{{route('change_password', ['user' => $user->id])}}">Change Password</a></li>
                                         <form action="{{route('logout')}}" method="POST">
                                             @csrf
