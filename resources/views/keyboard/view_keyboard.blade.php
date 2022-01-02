@@ -33,7 +33,7 @@
                 @endphp
                 <a href="{{route('detail_keyboard', ['keyboard' => $keyboard->id])}}">
                     <div class="col">
-                        <img src="{{asset($keyboard->image)}}">
+                        <img class="keyboard-image" src="{{asset($keyboard->image)}}">
                         <p>{{$keyboard->name}}</p>
                         <p>{{$keyboard->price}}</p>
                         @auth
@@ -50,5 +50,7 @@
                 </a>
             @endfor
         </div>
+        <p>Current Page: {{$keyboards->currentPage()}} of {{$keyboards->total()}}</p>
+        {{$keyboards->links()}}
     </div>
 @endsection

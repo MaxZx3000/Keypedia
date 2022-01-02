@@ -18,6 +18,7 @@
         .keyboard-image{
             width: 250px;
             height: 200px;
+            object-fit: cover;
         }
         a{
             text-decoration: none;
@@ -72,7 +73,9 @@
                                 </li>
                             @endif
                         @endauth
+                        <li class="nav-item">{{date('Y-m-d H:i:s')}}</li>
                     </ul>
+
                 </div>
             </nav>
         @yield("content")

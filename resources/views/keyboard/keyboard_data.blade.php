@@ -1,10 +1,5 @@
 @extends('layout')
 @section('content')
-    <style>
-        img{
-            width: 250px;
-        }
-    </style>
     <form action="
         @if (empty($keyboard->name))
             {{route('process_add_keyboard')}}
@@ -58,7 +53,7 @@
                     <div class="text-danger">{{$message}}</div>
                 @enderror
                 <p>Your previous uploaded image: </p>
-                <img src="{{old('image') ? asset(old('image')) : asset($keyboard["image"])}}">
+                <img class="keyboard-image" src="{{old('image') ? asset(old('image')) : asset($keyboard["image"])}}">
             </div>
             <button type="submit" class="btn btn-success">Submit</button>
         </div>

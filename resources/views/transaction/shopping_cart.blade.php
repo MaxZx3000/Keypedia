@@ -16,7 +16,7 @@
                     $keyboard = $keyboards[$index][0];
                 @endphp
                 <div class="col-3">
-                    <img src="{{asset($keyboard['image'])}}">
+                    <img class="keyboard-image" src="{{asset($keyboard['image'])}}">
                 </div>
                 <div class="col-9">
                     <p>Subtotal: {{$shoppingCart["quantity"] * $keyboard["price"]}}</p>
@@ -32,8 +32,10 @@
             @endforeach
         </div>
     </div>
-    <form action="{{route('process_my_cart_checkout', ["user" => $user])}}" method="POST">
-        @csrf
-        <button type="submit">Checkout</button>
-    </form>
+    @if (sizeof($shoppingCarts) > 0)
+        <form action="{{route('process_my_cart_checkout', ["user" => $user])}}" method="POST">
+            @csrf
+            <button type="submit">Checkout</button>
+        </form>
+    @endif
 @endsection

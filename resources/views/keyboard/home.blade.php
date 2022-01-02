@@ -1,11 +1,5 @@
 @extends('layout')
 @section('content')
-    <style>
-        img{
-            width: 200px;
-            object-fit: cover;
-        }
-    </style>
     @isset($message)
         <div class="alert alert-{{$message[0]}}">{{$message[1]}}</div>
     @endisset
@@ -20,7 +14,7 @@
                 <a href="{{route('keyboard', ['categoryID' => $category["id"]])}}">
                     <div class="col col-lg-4 col-md-6 col-sm-12">
                         <p>{{$category["name"]}}</p>
-                        <img src = "{{asset($category["image"])}}">
+                        <img class="keyboard-image" src = "{{asset($category["image"])}}">
                     </div>
                 </a>
             @endfor

@@ -20,22 +20,28 @@ class TransactionController extends FileController
         foreach ($checkoutShoppingCarts as $checkoutShoppingCart) {
             $keyboard = Keyboard::where('id', $checkoutShoppingCart->keyboard_id)
                                 ->first();
+
+            $todayDate = Carbon::now()->format('Y-m-d H:i:s');
+
             $transactionHistory = new Transaction([
                 "user_id" => $user->id,
                 "keyboard_name" => $keyboard["name"],
                 "keyboard_image" => $keyboard["image"],
                 "price_per_keyboard" => $keyboard["price"],
                 "quantity" => $checkoutShoppingCart["quantity"],
-                "date" => Carbon::now()->format('Y-m-d h:m:s')
+                "date" => $todayDate
             ]);
             $transactionHistory->save();
         }
-        Transaction::truncate();
+
+        ShoppingCart::where('user_id', $user->id)
+                    ->delete();
+
         return redirect()
                 ->route('history_transaction', ["user" => $user])
                 ->with("message", array('success', $message));
     }
-    public function process_my_cart_update_quantity(Request $request, Keyboard $keyboard, User $user)
+    public function process_my_cart_update_quantity(Request $request, User $user, Keyboard $keyboard)
     {
         $validatedData = $this->validate_quantity_keyboard($request, -1);
         $shoppingCart = ShoppingCart::where('user_id', $user->id)

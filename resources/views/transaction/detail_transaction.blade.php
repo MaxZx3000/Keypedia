@@ -13,10 +13,12 @@
             </thead>
             <tbody>
                 @foreach ($transactions as $transaction)
-                    <td><img class="keyboard-image" src="{{asset($transaction["keyboard_image"])}}"></td>
-                    <td>{{$transaction["keyboard_name"]}}</td>
-                    <td>{{$transaction["quantity"] * $transaction["price_per_keyboard"] }}</td>
-                    <td>{{$transaction["quantity"]}}</td>
+                    <tr>
+                        <td><img class="keyboard-image" src="{{asset($transaction["keyboard_image"])}}"></td>
+                        <td>{{$transaction["keyboard_name"]}}</td>
+                        <td>{{$transaction["quantity"] * $transaction["price_per_keyboard"] }}</td>
+                        <td>{{$transaction["quantity"]}}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

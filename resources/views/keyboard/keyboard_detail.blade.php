@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <img src="{{asset($keyboard->image)}}">
+                <img class="keyboard-image" src="{{asset($keyboard->image)}}">
             </div>
             <div class="col">
                 <p>$ {{ $keyboard["price"] }}</p>

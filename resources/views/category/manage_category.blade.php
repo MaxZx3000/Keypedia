@@ -13,7 +13,7 @@
         <div class="row">
             @foreach ($categories as $category)
                 <div class="col">
-                    <img src="{{asset($category['image'])}}">
+                    <img class="keyboard-image" src="{{asset($category['image'])}}">
                     <p>{{$category["name"]}}</p>
                     <form action="{{route('process_delete_category', ['category' => $category->id])}}" method="POST" enctype="multipart/form-data">
                         @csrf
