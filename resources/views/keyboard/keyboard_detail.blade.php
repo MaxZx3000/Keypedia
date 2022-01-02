@@ -9,9 +9,20 @@
             <div class="col">
                 <p>$ {{ $keyboard["price"] }}</p>
                 <p>{{ $keyboard["description"] }}</p>
-                <form action="{{route('process_detail_keyboard', ['keyboard' => $keyboard->id])}}" method="POST">
-                    @csrf
-                    @auth
+                @if (Auth::guest() || $user->role == 'C')
+                    <form action="
+                            @if(Auth::user())
+                                {{route('process_detail_keyboard', ['keyboard' => $keyboard->id])}}
+                            @else
+                                {{route('login')}}
+                            @endif
+                        "
+                        @if (Auth::user())
+                            method="POST"
+                        @else
+                            method="GET"
+                        @endif>
+                        @csrf
                         <div class="form-group">
                             <label for="quantity">Quantity</label>
                             <input type="number" name="quantity" id="quantity">
@@ -20,8 +31,8 @@
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-success">Add to Cart</button>
-                    @endauth
-                </form>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
