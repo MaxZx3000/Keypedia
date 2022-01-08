@@ -11,7 +11,7 @@ class CustomerUserSeeder extends Seeder
     {
         // Code to insert Customer data
         $users = [
-            ["username" => "Anthony Kevin Oktavius", "email_address" => "programist851@gmail.com",
+            ["username" => "Benten", "email_address" => "benten@gmail.com",
             "password" => "SamplePassword1", "Address" => "Jl. Sample Road 22", "Gender" => "Male",
             "date_of_birth" => '2014-12-07', "role" => 'C'],
         ];
