@@ -16,11 +16,12 @@ class AuthController extends Controller
                     ->first();
 
         if ($user){
+            $remember = $request->has('remember_me');
             if ($user->role == 'M'){
-                Auth::login($user);
+                Auth::login($user, $remember);
             }
             else if ($user->role == 'C'){
-                Auth::login($user);
+                Auth::login($user, $remember);
             }
             return redirect()
                 ->route('home');
@@ -88,7 +89,8 @@ class AuthController extends Controller
     private function validate_login(Request $request){
         return $request->validate([
             "email_address" => "required|email",
-            "password" => "required"
+            "password" => "required",
+            "remember_me" => ""
         ]);
     }
     private function validate_change_password(Request $request, User $user){

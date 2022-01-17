@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->char('gender', 6);
             $table->date('date_of_birth');
             $table->char('role', 1);
+            $table->string('remember_token')->nullable();
         });
     }
 
