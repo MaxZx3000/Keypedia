@@ -18,9 +18,9 @@ class FileController extends Controller
     //     catch(Exception $e){}
     //     return $this->save_file_data($request, $image);
     // }
-    protected function save_file_data($requestImage, $image, $folderName){
+    protected function save_file_data(Request $requestImage, $image, $folderName){
         $imageName = $image->getClientOriginalName();
-        return $requestImage->move($folderName, $imageName);
+        return $image->storeAs($folderName, $imageName);
     }
     protected function replace_file_data(Request $request, $image, $folderName, $oldImagePath){
         try{

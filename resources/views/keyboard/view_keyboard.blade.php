@@ -33,7 +33,7 @@
                 @endphp
                 <a href="{{route('detail_keyboard', ['keyboard' => $keyboard->id])}}">
                     <div class="col">
-                        <img class="keyboard-image" src="{{asset($keyboard->image)}}">
+                        <img class="keyboard-image" src="{{asset('storage/'.$keyboard->image)}}">
                         <p>{{$keyboard->name}}</p>
                         <p>{{$keyboard->price}}</p>
                         @auth

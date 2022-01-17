@@ -15,7 +15,7 @@ class DataKeyboardController extends FileController
         $validatedData = $this->validate_keyboard_data($request);
 
         $keyboard = new Keyboard($validatedData);
-        $keyboard["image"] = $this->save_file_data($request, $request->image);
+        $keyboard["image"] = $this->save_file_data($request, $request->image, 'images/keyboards');
         $keyboard->save();
 
         $message = "$keyboard->name has been successfully added!";
@@ -38,7 +38,7 @@ class DataKeyboardController extends FileController
         $validatedData = $this->validate_keyboard_data($request);
         $model = Keyboard::where('id', $keyboardID)->first();
 
-        $validatedData["image"] = $this->replace_file_data($request, $request->image, $model["image"]);
+        $validatedData["image"] = $this->replace_file_data($request, $request->image, 'images/keyboards', $model["image"]);
         $model->update($validatedData);
 
         $keyboardName = $validatedData["name"];

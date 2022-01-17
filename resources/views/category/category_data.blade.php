@@ -9,7 +9,7 @@
         @csrf
         <div class="row">
             <div class="col">
-                <img class="keyboard-image" src="{{asset($category['image'])}}">
+                <img class="keyboard-image" src="{{asset('storage/'.$category['image'])}}">
             </div>
             <div class="col">
                 <div class="form-group">

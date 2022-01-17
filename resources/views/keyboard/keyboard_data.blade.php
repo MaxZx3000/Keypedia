@@ -53,7 +53,7 @@
                     <div class="text-danger">{{$message}}</div>
                 @enderror
                 <p>Your previous uploaded image: </p>
-                <img class="keyboard-image" src="{{old('image') ? asset(old('image')) : asset($keyboard["image"])}}">
+                <img class="keyboard-image" src="{{old('image') ? asset('storage/'.old('image')) : asset('storage/'.$keyboard["image"])}}">
             </div>
             <button type="submit" class="btn btn-success">Submit</button>
         </div>

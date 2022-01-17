@@ -14,7 +14,7 @@
                 <a href="{{route('keyboard', ['categoryID' => $category["id"]])}}">
                     <div class="col col-lg-4 col-md-6 col-sm-12">
                         <p>{{$category["name"]}}</p>
-                        <img class="keyboard-image" src = "{{asset($category["image"])}}">
+                        <img class="keyboard-image" src = "{{asset('storage/'.$category["image"])}}">
                     </div>
                 </a>
             @endfor
