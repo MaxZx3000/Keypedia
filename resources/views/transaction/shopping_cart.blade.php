@@ -16,7 +16,7 @@
                     $keyboard = $keyboards[$index][0];
                 @endphp
                 <div class="col-3">
-                    <img class="keyboard-image" src="{{asset($keyboard['image'])}}">
+                    <img class="keyboard-image" src="{{asset('storage/'.$keyboard['image'])}}">
                 </div>
                 <div class="col-9">
                     <p>Subtotal: {{$shoppingCart["quantity"] * $keyboard["price"]}}</p>

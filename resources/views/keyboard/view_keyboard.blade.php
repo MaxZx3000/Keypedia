@@ -42,7 +42,7 @@
                                 <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id, 'category' => $categoryID])}}" method="post">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn btn-success">Remove Keyboard</a>
+                                    <button type="submit" class="btn btn-success">{{ 'Remove Keyboard '.$keyboard->id }}</a>
                                 </form>
                             @endif
                         @endauth

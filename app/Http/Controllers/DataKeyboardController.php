@@ -24,10 +24,11 @@ class DataKeyboardController extends FileController
                 ->route('home')
                 ->with('message', $message);
     }
-    public function process_delete_keyboard(Category $category, Keyboard $keyboard)
+    public function process_delete_keyboard(Category $category, $keyboardID)
     {
-        $keyboardName = $keyboard->name;
-        $keyboard->first()->delete();
+        $model = Keyboard::where('id', $keyboardID)->first();
+        $keyboardName = $model->name;
+        $model->delete();
 
         return redirect()
                 ->route('keyboard', $category->id)
@@ -38,7 +39,8 @@ class DataKeyboardController extends FileController
         $validatedData = $this->validate_keyboard_data($request);
         $model = Keyboard::where('id', $keyboardID)->first();
 
-        $validatedData["image"] = $this->replace_file_data($request, $request->image, 'images/keyboards', $model["image"]);
+        if ($request->has('image'))
+            $validatedData["image"] = $this->replace_file_data($request, $request->image, 'images/keyboards', $model["image"]);
         $model->update($validatedData);
 
         $keyboardName = $validatedData["name"];

@@ -14,7 +14,7 @@
             <tbody>
                 @foreach ($transactions as $transaction)
                     <tr>
-                        <td><img class="keyboard-image" src="{{asset($transaction["keyboard_image"])}}"></td>
+                        <td><img class="keyboard-image" src="{{asset('storage/'.$transaction["keyboard_image"])}}"></td>
                         <td>{{$transaction["keyboard_name"]}}</td>
                         <td>{{$transaction["quantity"] * $transaction["price_per_keyboard"] }}</td>
                         <td>{{$transaction["quantity"]}}</td>
