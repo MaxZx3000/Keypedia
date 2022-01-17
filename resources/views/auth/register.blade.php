@@ -19,14 +19,14 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" name="password" class="form-control" id="password">
+                <input type="password" name="password" class="form-control" id="password">
                 @error("password")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="text" name="confirm_password" class="form-control" id="confirm_password">
+                <input type="password" name="confirm_password" class="form-control" id="confirm_password">
                 @error("confirm_password")
                     <div class="text-danger">{{$message}}</div>
                 @enderror
