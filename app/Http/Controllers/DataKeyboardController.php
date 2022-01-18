@@ -53,16 +53,18 @@ class DataKeyboardController extends FileController
 
     public function get_edit_keyboard_page($categoryID, Keyboard $keyboard){
         $categories = Category::all();
+        $header_categories = Category::all();
         $user = Auth::user();
 
-        return view('keyboard.keyboard_data', compact("keyboard", "categories", "user", "categoryID"));
+        return view('keyboard.keyboard_data', compact("keyboard", "categories", "user", "categoryID", "header_categories"));
     }
     public function get_add_keyboard_page(){
         $user = Auth::user();
         $categories = Category::all();
+        $header_categories = Category::all();
         $keyboard = new Keyboard();
 
-        return view('keyboard.keyboard_data', compact('keyboard', 'categories', 'user'));
+        return view('keyboard.keyboard_data', compact('keyboard', 'categories', 'user', 'header_categories'));
     }
 
     private function validate_keyboard_data(Request $request){

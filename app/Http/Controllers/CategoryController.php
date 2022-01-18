@@ -12,13 +12,15 @@ class CategoryController extends FileController
     {
         $user = Auth::user();
         $categories = Category::all();
+        $header_categories = Category::all();
         $message = session('message');
-        return view('category.manage_category', compact('user', 'categories', 'message'));
+        return view('category.manage_category', compact('user', 'categories', 'message', 'header_categories'));
     }
     public function get_edit_category_page(Category $category)
     {
         $user = Auth::user();
-        return view('category.category_data', compact('user', 'category'));
+        $header_categories = Category::all();
+        return view('category.category_data', compact('user', 'category', 'header_categories'));
     }
     public function process_edit_category(Request $request, Category $category)
     {

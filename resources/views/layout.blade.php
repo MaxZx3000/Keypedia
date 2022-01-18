@@ -40,6 +40,20 @@
                                 <a class="nav-link" href="{{route('register')}}">Register</a>
                             </li>
                         @endguest
+
+                        @if(!empty($header_categories))
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Category
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @forelse($header_categories as $category)
+                                        <li><a class="dropdown-item" href="{{route('keyboard', ['categoryID' => $category["id"]])}}">{{$category["name"]}}</a></li>
+                                    @empty
+                                    @endforelse
+                                </ul>
+                            </li>
+                        @endif
                         @auth
                             @if ($user->role == 'C')
                                 <li class="nav-item dropdown">

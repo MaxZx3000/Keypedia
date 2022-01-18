@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,6 @@ class AuthController extends Controller
 {
     public function process_login(Request $request){
         $credentials = $this->validate_login($request);
-
         $user = User::where('email_address', $credentials["email_address"])
                     ->where('password', $credentials["password"])
                     ->first();

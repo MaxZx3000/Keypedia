@@ -10,8 +10,9 @@ class HomeController extends Controller
 {
     public function get_home_page(){
         $categories = Category::all();
+        $header_categories = Category::all();
         $user = Auth::user();
         
-        return view('keyboard.home', compact('categories', 'user'));
+        return view('keyboard.home', compact('categories', 'user', 'header_categories'));
     }
 }

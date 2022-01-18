@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keyboard;
+use App\Models\Category;
 use App\Models\ShoppingCart;
 use App\Models\Transaction;
 use App\Models\User;
@@ -83,13 +84,15 @@ class TransactionController extends FileController
     public function get_detail_keyboard_page(Keyboard $keyboard)
     {
         $user = Auth::user();
-        return view('keyboard.keyboard_detail', compact('keyboard', 'user'));
+        $header_categories = Category::all();
+        return view('keyboard.keyboard_detail', compact('keyboard', 'user', 'header_categories'));
     }
     public function get_my_cart_page(User $user)
     {
+        $header_categories = Category::all();
         $shoppingCarts = ShoppingCart::where('user_id', $user->id)->get();
         $keyboards = $this->get_keyboards_data($shoppingCarts);
-        return view('transaction.shopping_cart', compact('shoppingCarts', 'keyboards', 'user'));
+        return view('transaction.shopping_cart', compact('shoppingCarts', 'keyboards', 'user', 'header_categories'));
     }
     private function get_keyboards_data($shoppingCarts){
         $keyboards = [];
@@ -102,17 +105,19 @@ class TransactionController extends FileController
     }
     public function get_transaction_history_page(User $user)
     {
+        $header_categories = Category::all();
         $transactions = Transaction::where('user_id', $user->id)
                                     ->distinct()
                                     ->get(['date']);
-        return view("transaction.history_transactions", compact(["user", "transactions"]));
+        return view("transaction.history_transactions", compact(["user", "transactions", "header_categories"]));
     }
     public function get_transaction_detail_page(User $user, $transactionDate)
     {
+        $header_categories = Category::all();
         $transactions = Transaction::where('user_id', $user->id)
                                     ->where('date', $transactionDate)
                                     ->get();
-        return view('transaction.detail_transaction', compact(['user', 'transactions']));
+        return view('transaction.detail_transaction', compact(['user', 'transactions', 'header_categories']));
     }
     private function validate_quantity_keyboard(Request $request, int $gtValue)
     {
