@@ -11,12 +11,14 @@
                 @php
                     $category = $categories[$i];
                 @endphp
-                <a href="{{route('keyboard', ['categoryID' => $category["id"]])}}">
-                    <div class="col col-lg-4 col-md-6 col-sm-12">
-                        <p>{{$category["name"]}}</p>
-                        <img class="keyboard-image" src = "{{asset('storage/'.$category["image"])}}">
-                    </div>
-                </a>
+                <div class = "col-md-3 card d-flex">
+                    <a href="{{route('keyboard', ['categoryID' => $category["id"]])}}">
+                        <div class="card-body">
+                            <p>{{$category["name"]}}</p>
+                            <img class="keyboard-image card-img-top" src = "{{asset('storage/'.$category["image"])}}">
+                        </div>
+                    </a>
+                </div>
             @endfor
         </div>
     </div>

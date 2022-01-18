@@ -31,23 +31,25 @@
                 @php
                     $keyboard = $keyboards[$i];
                 @endphp
-                <a href="{{route('detail_keyboard', ['keyboard' => $keyboard->id])}}">
-                    <div class="col">
-                        <img class="keyboard-image" src="{{asset('storage/'.$keyboard->image)}}">
-                        <p>{{$keyboard->name}}</p>
-                        <p>{{$keyboard->price}}</p>
-                        @auth
-                            @if ($user["role"] == 'M')
-                                <a href="{{route('keyboard.edit', ['keyboard' => $keyboard->id, 'categoryID' => $categoryID])}}" class="btn btn-success">Update Keyboard</a>
-                                <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id, 'category' => $categoryID])}}" method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">{{ 'Remove Keyboard '.$keyboard->id }}</a>
-                                </form>
-                            @endif
-                        @endauth
-                    </div>
-                </a>
+                <div class = "col-md-3 card d-flex">
+                    <a href="{{route('detail_keyboard', ['keyboard' => $keyboard->id])}}">
+                        <div class="card-body">
+                            <img class="keyboard-image card-img-top" src="{{asset('storage/'.$keyboard->image)}}">
+                            <p>{{$keyboard->name}}</p>
+                            <p>$ {{$keyboard->price}}</p>
+                            @auth
+                                @if ($user["role"] == 'M')
+                                    <a href="{{route('keyboard.edit', ['keyboard' => $keyboard->id, 'categoryID' => $categoryID])}}" class="btn btn-success">Update Keyboard</a>
+                                    <form action="{{route('process_delete_keyboard', ['keyboard' => $keyboard->id, 'category' => $categoryID])}}" method="post">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">{{ 'Remove Keyboard '.$keyboard->id }}</a>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
+                    </a>
+                </div>
             @endfor
         </div>
         <p>Current Page: {{$keyboards->currentPage()}} of {{$keyboards->total()}}</p>

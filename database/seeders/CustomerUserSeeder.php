@@ -14,9 +14,9 @@ class CustomerUserSeeder extends Seeder
             ["username" => "Benten", "email_address" => "benten@gmail.com",
             "password" => "SamplePassword1", "Address" => "Jl. Sample Road 22", "Gender" => "Male",
             "date_of_birth" => '2014-12-07', "role" => 'C'],
-            ["username" => "abc", "email_address" => "abc@gmail.com",
-            "password" => "12345678", "Address" => "Jl. Sample Road 22", "Gender" => "Male",
-            "date_of_birth" => '2014-12-07', "role" => 'M'],
+            ["username" => "Admin", "email_address" => "admin@keypedia.com",
+            "password" => "password", "Address" => "Jl. Sample Road 22", "Gender" => "Male",
+            "date_of_birth" => '2014-10-15', "role" => 'M'],
         ];
         User::insert($users);
     }
